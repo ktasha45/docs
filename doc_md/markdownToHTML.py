@@ -32,5 +32,5 @@ with open(file_path, 'r', encoding='UTF8') as f:
 md = Markdown(extensions=[GithubFlavoredMarkdownExtension()])
 
 html = md.convert(text)
-with open(file_path.split('.')[0] + '.html', 'w', encoding='UTF8') as f:
+with open('../doc_body/' + file_path.split('.')[0] + '.html', 'w', encoding='UTF8') as f:
     f.write(html)
