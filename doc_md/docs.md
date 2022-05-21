@@ -1,0 +1,6 @@
+1. [linux](doc_html/linux.html)
+2. [tex](doc_html/tex.html)
+3. [object detection](doc_html/object-detection.html)
+4. [fast-rcnn](doc_html/fast-rcnn.html)
+5. [neural network](doc_html/neural-network.html)
+6. [occam's rasor](doc_html/occam-rasor.html)
