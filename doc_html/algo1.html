@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>linux</title>
+        <meta charset="utf-8">
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}            
+            });
+        </script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+        <style type="text/css">
+            @import url("../css/style.css");
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap');
+        </style>
+    </head>
+    <body>
+        <div id="mainBody">
+            <p>
+                <h1><a href="../index.html">main</a></h1></p>
+                <h2><a href="../docs.html">docs</a></h2>
+            </p>
+            <p>
+                <p>algorithm<br />
+                    참고: 알고리즘 - 산죠이 다스굽타</p>
+                    <h1>수 알고리즘</h1>
+                    <p>주제: 인수분해, 소수 판별<br />
+                    뛰어난 수학자와 과학자들이 수 세기 동안 노력했지만 숫자 N을 인수분해하는 가장 빠른 방법은 N의 비트 수에 지수적인 시간이 걸린다.<br />
+                    한편, 수가 소수인지 아닌지는 쉽게 판별할 수 있다. 이 밀접하게 연관된 두 가지 문제의 불균형, 즉 하나는 매우 어렵고 하나는 쉽다는 사실이 안전한 통신을 가능케 하는 기술의 핵심 원리이다. (RSA 암호)<br />
+                    이를 이해하기 위해선 먼저 수와 관련된 여리 가지 일을 처리하는 알고리즘을 알아야 한다.  </p>
+                    <h2>덧셈</h2>
+                    <p>십진수의 기본 속성  </p>
+                    <ul>
+                    <li>세 개의 한 자릿수를 더한 합계는 최대 두 자릿수를 넘을 수 없다. 십진수 외에도 base가 2 이상인 모든 진법에서 만족한다. 이진수에서 한 자릿수 세 개의 합계의 최댓값은 3이고(1+1+1), 이는 이진법으로 두 자리이다.<ul>
+                    <li>ex) 9+9+9 = 27  </li>
+                    </ul>
+                    </li>
+                    </ul>
+                    <p>위의 규칙만 지키면 어떤 진법의 두 수를 더하는 방법은 다음과 같다.</p>
+                    <ol>
+                    <li>숫자들을 오른쪽 끝이 일치하도록 나열한다.</li>
+                    <li>오른쪽에ㅐ서부터 왼쪽으로 덧셈을 수행한다.</li>
+                    <li>덧셈의 합이 진수보다 크거나 같아지면, 다음 왼쪽 자리로 넘긴다.</li>
+                    <li>각 자릿수의 합은 기껏해야 두 자리이기에 넘어가는 수는 한 자리이다.</li>
+                    <li>어느 단계에서나 원래 그 자릿수에 해당하는 두 숫자와 넘어오는 한 자릿수, 총 3개의 한 자리 숫자만 더해진다.</li>
+                    </ol>
+                    <p>x와 y가 n자리 수라고 하자. x+y는 최대 n+1자리이다. 각 자리의 합은 일정(상수) 시간 안에 계산할 수 있다. 따라서 덧셈 알고리즘의 수행 시간은 c(n+1)이다. 여기서 c는 상수이다. 즉, 덧셈 알고리즘의 수행 시간은 선형적이다. c와 관련된 값은 상관쓰지 말고, 수행 시간을 O(n)이라 생각하자.<br />
+                    더 빠른 건 없을까? 아마 없을 것이다. n자리 수를 더하려면 최소한 두 수를 읽고, 결과를 써야 하므로 n번의 연산은 해야 한다. 그러므로 덧셈 알고리즘은 여기서 최적이다.  </p>
+                    <p>다만 여기서 이상한 부분이 있다. 왜 O(n)의 연산인가? 사실 컴퓨터에서 두 이진수를 더하는 작업은 하나의 명령어(<code>+</code>)만 있으면 된다. 이에 대한 해답은 두 가지이다.</p>
+                    <ol>
+                    <li>더하는 숫자들이 특정 자료형보다 더 큰 범위의 숫자라면, 즉 수천 비트로 된 숫자를 다루는 데는 이 방법이 유용하며 필수이다.</li>
+                    <li>알고리즘을 공부할 때는 컴퓨터 하드웨어를 구성하기 위해 구현된 기본 알고리즘도 공부하는 것이 합리적이다. 그렇게 함으로써, 알고리즘을 수행하는 데 필요한 하드웨어와 트랜지스터, 배선의 양을 반영하여 알고리즘의 비트 복잡도에 초점을 맞출 수 있다. (비트 복잡도는 각 비트에 대한 기본 연산의 개수이다.)</li>
+                    </ol>
+                    <h2>곱셈</h2>
+                    <p>x와 y를 곱하는 경우를 생각해보자.</p>
+                    <ol>
+                    <li>y의 각 자릿수 숫자와 x를 곱한 결과를 구한다.</li>
+                    <li>이를 해당하는 y 자릿수만큼 왼쪽으로 이동하여 나열한다.</li>
+                    <li>마지막으로 이들을 전부 더한다.</li>
+                    </ol>
+                    <p>이진수 곱셈에선 1번의 결과가 0이거나 x이므로 쉽다. 또한, 왼쪽으로 이동하는 것은 진수를 곱함으로써 빠르게 수행할 수 있다. (shift)<br />
+                    x와 y가 n 자릴면 중간값은 n개가 생긴다. 중간값들은 자릿수만큼 왼쪽으로 이동했으므로 결과적으로 최대 2n자리의 수가 된다. 이 중간값들을 전부 더하는 데 걸리는 총 시간은 다음과 같다.<br />
+                    $$\underbrace{O(n)+O(n)+...+O(n)}_{\text{n-1}}$$<br />
+                    이 값은 O(n^2)이다. 입력 크기의 제곱에 비례하므로, 덧셈보다 훨씬 느리다.  </p>
+                    <p>더 빠른 방법은, 알 콰리즈미의 방법이다. 두 개의 십진수 x와 y를 곱하려면, </p>
+                    <ol>
+                    <li>두 숫자를 나란히 적는다.</li>
+                    <li>첫 번째 숫자를 반으로 나누고 나머지는 버린다.</li>
+                    <li>두 번째 숫자는 두 배를 한다.</li>
+                    <li>1-3의 과정을 첫 번째 숫자가 1이 될 때까지 반복한다.</li>
+                    <li>첫 번째 숫자가 짝수인 열을 제외하고, 나머지 두 번째 숫자들을 전부 더한다.</li>
+                    </ol>
+                    <p>사실 이 방법은 앞선 방법과 방식이 결국 같다. y=11, x=13이라고 해보자. y를 이진수로 명시하지 않고, 2로 계속 나누면서 짝수인지 홀수인지 보고, 그때그떄의 결과를 얻는다. 그리고 마지막에 전부 더한다. 이는 결국 y를 이진수로 표현하는 알고리즘과 다를 바가 없다. 그 알고리즘의 단계마다 x를 계속 곱할 뿐이다. (곱한다고는 하지만, 앞서 언급했듯 곱한 결과는 0 또는 x이다.) 따라서, 알 콰리즈미의 알고리즘은 십진수와 이진수 방식을 잘 섞어놓은 방법이라 할 수 있다.<br />
+                    다른 방식으로 다음과 같이 표현할 수 있다.<br />
+                    $$x \cdot y=
+                    \begin{cases}
+                    2(x \cdot \lfloor y/2 \rfloor), &amp; y \ \ \text{is odd} \\
+                    x + 2(x \cdot \lfloor y/2 \rfloor), &amp; y \ \ \text{is even}<br />
+                    \end{cases}$$<br />
+                    이를 파이썬 코드로 표현하면 아래와 같다. 두 방식 모두 가능하다. 두 번째 방식이 더 이해하기 쉬운 것 같다.</p>
+<div class="colorscripter-code" style="color:#010101;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#fafafa;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px;border-right:2px solid #e5e5e5"><div style="margin:0;padding:0;word-break:normal;text-align:right;color:#666;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="line-height:130%">1</div><div style="line-height:130%">2</div><div style="line-height:130%">3</div><div style="line-height:130%">4</div><div style="line-height:130%">5</div><div style="line-height:130%">6</div><div style="line-height:130%">7</div><div style="line-height:130%">8</div><div style="line-height:130%">9</div><div style="line-height:130%">10</div><div style="line-height:130%">11</div><div style="line-height:130%">12</div><div style="line-height:130%">13</div><div style="line-height:130%">14</div><div style="line-height:130%">15</div><div style="line-height:130%">16</div></div></td><td style="padding:6px 0;text-align:left"><div style="margin:0;padding:0;color:#010101;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#a71d5d">def</span>&nbsp;multiply1(x:<span style="color:#066de2">int</span>,&nbsp;y:<span style="color:#066de2">int</span>)&nbsp;<span style="color:#0086b3"></span><span style="color:#a71d5d">-</span><span style="color:#0086b3"></span><span style="color:#a71d5d">&gt;</span>&nbsp;<span style="color:#066de2">int</span>:</div><div style="background-color:#f0f0f0; padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#a71d5d">if</span>&nbsp;y&nbsp;<span style="color:#0086b3"></span><span style="color:#a71d5d">=</span><span style="color:#0086b3"></span><span style="color:#a71d5d">=</span>&nbsp;<span style="color:#0099cc">0</span>:</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#a71d5d">return</span>&nbsp;<span style="color:#0099cc">0</span></div><div style="background-color:#f0f0f0; padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#a71d5d">if</span>&nbsp;y&nbsp;%&nbsp;<span style="color:#0099cc">2</span>&nbsp;<span style="color:#0086b3"></span><span style="color:#a71d5d">=</span><span style="color:#0086b3"></span><span style="color:#a71d5d">=</span>&nbsp;<span style="color:#0099cc">0</span>:</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#a71d5d">return</span>&nbsp;<span style="color:#0099cc">2</span>&nbsp;<span style="color:#0086b3"></span><span style="color:#a71d5d">*</span>&nbsp;multiply1(x,&nbsp;y<span style="color:#0086b3"></span><span style="color:#a71d5d">/</span><span style="color:#0086b3"></span><span style="color:#a71d5d">/</span><span style="color:#0099cc">2</span>)</div><div style="background-color:#f0f0f0; padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#a71d5d">else</span>:</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#a71d5d">return</span>&nbsp;x&nbsp;<span style="color:#0086b3"></span><span style="color:#a71d5d">+</span>&nbsp;<span style="color:#0099cc">2</span>&nbsp;<span style="color:#0086b3"></span><span style="color:#a71d5d">*</span>&nbsp;multiply1(x,&nbsp;y<span style="color:#0086b3"></span><span style="color:#a71d5d">/</span><span style="color:#0086b3"></span><span style="color:#a71d5d">/</span><span style="color:#0099cc">2</span>)</div><div style="background-color:#f0f0f0; padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#a71d5d">def</span>&nbsp;multiply2(x:<span style="color:#066de2">int</span>,&nbsp;y:<span style="color:#066de2">int</span>)&nbsp;<span style="color:#0086b3"></span><span style="color:#a71d5d">-</span><span style="color:#0086b3"></span><span style="color:#a71d5d">&gt;</span>&nbsp;<span style="color:#066de2">int</span>:</div><div style="background-color:#f0f0f0; padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#a71d5d">if</span>&nbsp;y&nbsp;<span style="color:#0086b3"></span><span style="color:#a71d5d">=</span><span style="color:#0086b3"></span><span style="color:#a71d5d">=</span>&nbsp;<span style="color:#0099cc">0</span>:</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#a71d5d">return</span>&nbsp;<span style="color:#0099cc">0</span></div><div style="background-color:#f0f0f0; padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;z&nbsp;<span style="color:#0086b3"></span><span style="color:#a71d5d">=</span>&nbsp;multiply2(x,&nbsp;y<span style="color:#0086b3"></span><span style="color:#a71d5d">/</span><span style="color:#0086b3"></span><span style="color:#a71d5d">/</span><span style="color:#0099cc">2</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#a71d5d">if</span>&nbsp;y&nbsp;%&nbsp;<span style="color:#0099cc">2</span>&nbsp;<span style="color:#0086b3"></span><span style="color:#a71d5d">=</span><span style="color:#0086b3"></span><span style="color:#a71d5d">=</span>&nbsp;<span style="color:#0099cc">0</span>:</div><div style="background-color:#f0f0f0; padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#a71d5d">return</span>&nbsp;<span style="color:#0099cc">2</span>&nbsp;<span style="color:#0086b3"></span><span style="color:#a71d5d">*</span>&nbsp;z</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#a71d5d">else</span>:</div><div style="background-color:#f0f0f0; padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#a71d5d">return</span>&nbsp;x&nbsp;<span style="color:#0086b3"></span><span style="color:#a71d5d">+</span>&nbsp;<span style="color:#0099cc">2</span>&nbsp;<span style="color:#0086b3"></span><span style="color:#a71d5d">*</span>&nbsp;z</div></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#e5e5e5;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>                    <h2>나눗셈</h2>
+                    <p>...</p>
+            </p>
+        </div>
+    </body>
+</html>
